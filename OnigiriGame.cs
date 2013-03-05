@@ -16,10 +16,10 @@ namespace Nekonigiri
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class OnigiriGame : Microsoft.Xna.Framework.Game
+    internal class OnigiriGame : Microsoft.Xna.Framework.Game, ILevel
     {
-        const int WindowWidth = 640;
-        const int WindowHeight = 480;
+        internal const int WindowWidth = 640;
+        internal const int WindowHeight = 480;
 
         const int HudIconPadding = 10;
 
@@ -92,6 +92,7 @@ namespace Nekonigiri
         {
             GameData.Instance.Content = this.Content;
             GameData.Instance.game = this;
+            GameData.Instance.Level = this;
             
             this.playerPos = new Vector2(PlayerStartingX, PlayerStartingY);
             this.playerVelocity = Vector2.Zero;
@@ -416,6 +417,12 @@ namespace Nekonigiri
             Rectangle percentFill = new Rectangle(rect.X, rect.Y, (int) (rect.Width * fillPercent), rect.Height);
             spriteBatch.Draw(barSprite, percentFill, Color.White);
             spriteBatch.Draw(overlay, overlayPos, Color.White);
+        }
+
+        public IList<IGameObject> objectsCloseTo(IGameObject entity)
+        {
+            return gameObjects;
+            // TODO: Refactor this so it actually just gets nearby objects and is thus efficient.
         }
     }
 }

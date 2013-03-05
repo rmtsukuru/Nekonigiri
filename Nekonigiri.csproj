@@ -87,6 +87,7 @@
     <Compile Include="Entity\Block.cs" />
     <Compile Include="Entity\Damageable.cs" />
     <Compile Include="Entity\Faction.cs" />
+    <Compile Include="ILevel.cs" />
     <Compile Include="Entity\Neko.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Entity\GameObject.cs" />

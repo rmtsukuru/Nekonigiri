@@ -15,6 +15,12 @@ namespace Nekonigiri
 
         public Game game;
 
+        public ILevel Level
+        {
+            get;
+            set;
+        }
+
         private GameData()
         {
 
