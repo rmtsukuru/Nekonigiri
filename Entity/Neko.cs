@@ -33,7 +33,7 @@ namespace Nekonigiri
 
         Vector2 playerPos;
         Vector2 playerVelocity;
-        Rectangle playerHitbox;
+        public Rectangle playerHitbox;
         bool playerFacingRight;
         bool playerMoving;
         bool playerRunning;
@@ -73,6 +73,16 @@ namespace Nekonigiri
         {
             this.MaxOnigiri = maxOnigiri;
             this.OnigiriCount = currentOnigiri;
+
+            this.Position = new Vector2(PlayerStartingX, PlayerStartingY);
+
+            this.playerFacingRight = false;
+            this.playerMoving = false;
+            this.playerRunning = false;
+            this.playerJumping = false;
+            this.playerFalling = true;
+            this.remainingJumpTime = 0;
+            this.playerHitbox = DefaultPlayerHitbox;
         }
 
         private static Sprite FetchSprite()

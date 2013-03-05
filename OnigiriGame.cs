@@ -58,6 +58,8 @@ namespace Nekonigiri
         Sprite playerWalkingSprite;
         Sprite playerJumpingSprite;
 
+        Neko player;
+
         Vector2 playerPos;
         Vector2 playerVelocity;
         Rectangle playerHitbox;
@@ -93,6 +95,8 @@ namespace Nekonigiri
             GameData.Instance.Content = this.Content;
             GameData.Instance.game = this;
             GameData.Instance.Level = this;
+
+            this.player = new Neko();
             
             this.playerPos = new Vector2(PlayerStartingX, PlayerStartingY);
             this.playerVelocity = Vector2.Zero;
@@ -172,6 +176,7 @@ namespace Nekonigiri
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            #region Player Stuff
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
@@ -342,6 +347,8 @@ namespace Nekonigiri
             this.currentPlayerSprite.SpriteEffects = this.playerFacingRight ? SpriteEffects.FlipHorizontally
                                                                      : SpriteEffects.None;
             this.currentPlayerSprite.Update(gameTime);
+            #endregion
+            //this.player.Update(gameTime);
 
             this.UpdateHUD(gameTime);
 
@@ -381,6 +388,7 @@ namespace Nekonigiri
             
             this.DrawBackground(spriteBatch, gameTime);
             this.currentPlayerSprite.Draw(spriteBatch, gameTime);
+            //this.player.Draw(spriteBatch, gameTime);
             foreach (IGameObject entity in this.gameObjects)
             {
                 entity.Draw(spriteBatch, gameTime);
