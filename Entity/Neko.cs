@@ -102,13 +102,14 @@ namespace Nekonigiri
             return Neko.standingSprite;
         }
 
-        public override void Touches(GameObject entity)
+        public override void Touches(IGameObject entity)
         {
             // TODO: Put player collision-y stuff here.
         }
 
         public override void Update(GameTime gameTime)
         {
+            // Input and Motion
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
@@ -174,6 +175,7 @@ namespace Nekonigiri
                 this.Damage(1);
             }
 
+            // Jump Physics
             if (playerJumping)
             {
                 Velocity = new Vector2(Velocity.X, -1 * PlayerJumpSpeed);
@@ -193,6 +195,7 @@ namespace Nekonigiri
                 }
             }
 
+            // Collision Detection
             Rectangle temp = playerHitbox;
             temp.Offset((int)Math.Ceiling(Position.X), (int)Math.Ceiling(Position.Y));
             Rectangle horizontalHitbox = temp, verticalHitbox = temp;
@@ -206,6 +209,8 @@ namespace Nekonigiri
                 {
                     if (entity.TranslatedHitbox.Intersects(verticalHitbox))
                     {
+                        this.Touches(entity);
+                        entity.Touches(this);
                         if (Velocity.Y >= 0)
                         {
                             this.playerFalling = false;
@@ -219,6 +224,8 @@ namespace Nekonigiri
                     }
                     if (entity.TranslatedHitbox.Intersects(horizontalHitbox))
                     {
+                        this.Touches(entity);
+                        entity.Touches(this);
                         Velocity = new Vector2(0, this.Velocity.Y);
                     }
                 }
@@ -226,6 +233,7 @@ namespace Nekonigiri
 
             base.Update(gameTime);
 
+            // Adjusting for window bounds
             if (Position.Y + this.sprite.Texture.Height > OnigiriGame.WindowHeight)
             {
                 Position = new Vector2(Position.X, OnigiriGame.WindowHeight - this.sprite.Texture.Height);
@@ -240,6 +248,7 @@ namespace Nekonigiri
                 Position = new Vector2(OnigiriGame.WindowWidth - playerHitbox.Width, Position.Y);
             }
 
+            // Set correct sprite
             if (this.playerMoving && this.sprite != walkingSprite)
             {
                 this.sprite = walkingSprite;

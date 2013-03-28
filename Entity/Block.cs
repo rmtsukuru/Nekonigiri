@@ -24,7 +24,7 @@ namespace Nekonigiri
             this.Position = position;
         }
 
-        public override void Touches(GameObject entity)
+        public override void Touches(IGameObject entity)
         {
             // TODO: Figure out if this should do anything.
         }

@@ -56,7 +56,7 @@ namespace Nekonigiri
         /// Responds to this object coming in contact with another game object.
         /// </summary>
         /// <param name="entity">The other entity being touched.</param>
-        public abstract void Touches(GameObject entity);
+        public abstract void Touches(IGameObject entity);
 
         public virtual void Update(GameTime gameTime)
         {
