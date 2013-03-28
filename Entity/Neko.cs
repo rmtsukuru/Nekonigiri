@@ -31,8 +31,6 @@ namespace Nekonigiri
         private static Sprite walkingSprite;
         private static Sprite jumpingSprite;
 
-        Vector2 playerPos;
-        Vector2 playerVelocity;
         public Rectangle playerHitbox;
         bool playerFacingRight;
         bool playerMoving;
@@ -75,6 +73,7 @@ namespace Nekonigiri
             this.OnigiriCount = currentOnigiri;
 
             this.Position = new Vector2(PlayerStartingX, PlayerStartingY);
+            this.Velocity = Vector2.Zero;
 
             this.playerFacingRight = false;
             this.playerMoving = false;
@@ -113,32 +112,32 @@ namespace Nekonigiri
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
-                playerVelocity.X = movementSpeed;
+                Velocity = new Vector2(movementSpeed, Velocity.Y);
                 this.playerFacingRight = true;
                 this.playerMoving = true;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
-                playerVelocity.X = -1 * movementSpeed;
+                Velocity = new Vector2(-1 * movementSpeed, Velocity.Y);
                 this.playerFacingRight = false;
                 this.playerMoving = true;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right))
             {
                 this.playerMoving = false;
-                if (this.playerVelocity.X > 0)
+                if (this.Velocity.X > 0)
                 {
-                    this.playerVelocity.X -= PlayerInertiaAcceleration;
+                    this.Velocity = new Vector2(Velocity.X - PlayerInertiaAcceleration, Velocity.Y);
                 }
-                else if (this.playerVelocity.X < 0)
+                else if (this.Velocity.X < 0)
                 {
-                    this.playerVelocity.X += PlayerInertiaAcceleration;
+                    this.Velocity = new Vector2(Velocity.X + PlayerInertiaAcceleration, Velocity.Y);
                 }
 
-                if (Math.Abs(this.playerVelocity.X) < PlayerInertiaAcceleration)
+                if (Math.Abs(this.Velocity.X) < PlayerInertiaAcceleration)
                 {
-                    this.playerVelocity.X = 0;
+                    this.Velocity = new Vector2(0, Velocity.Y);
                 }
             }
 
@@ -177,7 +176,7 @@ namespace Nekonigiri
 
             if (playerJumping)
             {
-                playerVelocity.Y = -1 * PlayerJumpSpeed;
+                Velocity = new Vector2(Velocity.X, -1 * PlayerJumpSpeed);
                 this.remainingJumpTime -= gameTime.ElapsedGameTime.TotalSeconds;
                 if (this.remainingJumpTime <= 0)
                 {
@@ -188,17 +187,17 @@ namespace Nekonigiri
             // Gravity
             else if (this.playerFalling)
             {
-                if (playerVelocity.Y < PlayerFallSpeed)
+                if (Velocity.Y < PlayerFallSpeed)
                 {
-                    playerVelocity.Y += PlayerFallAcceleration;
+                    Velocity = new Vector2(Velocity.X, Velocity.Y + PlayerFallAcceleration);
                 }
             }
 
             Rectangle temp = playerHitbox;
-            temp.Offset((int)Math.Ceiling(playerPos.X), (int)Math.Ceiling(playerPos.Y));
+            temp.Offset((int)Math.Ceiling(Position.X), (int)Math.Ceiling(Position.Y));
             Rectangle horizontalHitbox = temp, verticalHitbox = temp;
-            horizontalHitbox.Offset((int)Math.Ceiling(playerVelocity.X), 0);
-            verticalHitbox.Offset(0, (int)Math.Ceiling(playerVelocity.Y));
+            horizontalHitbox.Offset((int)Math.Ceiling(Velocity.X), 0);
+            verticalHitbox.Offset(0, (int)Math.Ceiling(Velocity.Y));
             foreach (IGameObject entity in GameData.Instance.Level.objectsCloseTo(this))
             {
                 entity.Update(gameTime);
@@ -207,7 +206,7 @@ namespace Nekonigiri
                 {
                     if (entity.TranslatedHitbox.Intersects(verticalHitbox))
                     {
-                        if (playerVelocity.Y >= 0)
+                        if (Velocity.Y >= 0)
                         {
                             this.playerFalling = false;
                         }
@@ -216,29 +215,29 @@ namespace Nekonigiri
                             this.playerJumping = false;
                             this.playerFalling = true;
                         }
-                        this.playerVelocity.Y = 0;
+                        this.Velocity = new Vector2(this.Velocity.X, 0);
                     }
                     if (entity.TranslatedHitbox.Intersects(horizontalHitbox))
                     {
-                        playerVelocity.X = 0;
+                        Velocity = new Vector2(0, this.Velocity.Y);
                     }
                 }
             }
 
-            playerPos = new Vector2(playerPos.X + playerVelocity.X, playerPos.Y + playerVelocity.Y);
+            base.Update(gameTime);
 
-            if (playerPos.Y + this.sprite.Texture.Height > OnigiriGame.WindowHeight)
+            if (Position.Y + this.sprite.Texture.Height > OnigiriGame.WindowHeight)
             {
-                playerPos.Y = OnigiriGame.WindowHeight - this.sprite.Texture.Height;
+                Position = new Vector2(Position.X, OnigiriGame.WindowHeight - this.sprite.Texture.Height);
                 this.playerFalling = false;
             }
-            if (playerPos.X + playerHitbox.X < 0)
+            if (Position.X + playerHitbox.X < 0)
             {
-                playerPos.X = -1 * playerHitbox.X;
+                Position = new Vector2(-1 * playerHitbox.X, Position.Y);
             }
-            if (playerPos.X + playerHitbox.Width > OnigiriGame.WindowWidth)
+            if (Position.X + playerHitbox.Width > OnigiriGame.WindowWidth)
             {
-                playerPos.X = OnigiriGame.WindowWidth - playerHitbox.Width;
+                Position = new Vector2(OnigiriGame.WindowWidth - playerHitbox.Width, Position.Y);
             }
 
             if (this.playerMoving && this.sprite != walkingSprite)
@@ -266,12 +265,10 @@ namespace Nekonigiri
                 this.OnigiriCount = this.MaxOnigiri;
             }
 
-            this.sprite.Position = playerPos;
+            this.sprite.Position = Position;
             this.sprite.SpriteEffects = this.playerFacingRight ? SpriteEffects.FlipHorizontally
                                                                      : SpriteEffects.None;
             this.sprite.Update(gameTime);
-
-            base.Update(gameTime);
         }
 
         public override void Destroy()
