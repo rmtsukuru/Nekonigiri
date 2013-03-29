@@ -15,6 +15,12 @@ namespace Nekonigiri
         /// </summary>
         /// <param name="entity">The specified entity.</param>
         /// <returns></returns>
-        IList<IGameObject> objectsCloseTo(IGameObject entity);
+        IList<IGameObject> ObjectsCloseTo(IGameObject entity);
+
+        /// <summary>
+        /// Inserts the specified game object into the level.
+        /// </summary>
+        /// <param name="entity">The specified entity.</param>
+        void AddObject(IGameObject entity);
     }
 }

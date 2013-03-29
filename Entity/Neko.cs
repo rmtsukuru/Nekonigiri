@@ -14,6 +14,7 @@ namespace Nekonigiri
 
         readonly Rectangle DefaultPlayerHitbox = new Rectangle(13, 0, 39, 64);
 
+        // TODO: Get rid of "player" in all of these freaking names.
         const float PlayerStartingX = 300;
         const float PlayerStartingY = 250;
         private const int StartingMaxHealth = 100;
@@ -34,7 +35,7 @@ namespace Nekonigiri
         private static Sprite jumpingSprite;
 
         public Rectangle playerHitbox;
-        bool playerFacingRight;
+        bool isFacingRight;
         bool playerMoving;
         bool playerRunning;
         bool playerJumping;
@@ -77,7 +78,7 @@ namespace Nekonigiri
             this.Position = new Vector2(PlayerStartingX, PlayerStartingY);
             this.Velocity = Vector2.Zero;
 
-            this.playerFacingRight = false;
+            this.isFacingRight = false;
             this.playerMoving = false;
             this.playerRunning = false;
             this.playerJumping = false;
@@ -119,14 +120,14 @@ namespace Nekonigiri
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
                 Velocity = new Vector2(movementSpeed, Velocity.Y);
-                this.playerFacingRight = true;
+                this.isFacingRight = true;
                 this.playerMoving = true;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
                 Velocity = new Vector2(-1 * movementSpeed, Velocity.Y);
-                this.playerFacingRight = false;
+                this.isFacingRight = false;
                 this.playerMoving = true;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right))
@@ -170,6 +171,17 @@ namespace Nekonigiri
             else
             {
                 this.playerRunning = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.X) && GameData.Instance.lastKeyboardState.IsKeyUp(Keys.X))
+            {
+                if (this.OnigiriCount > 0)
+                {
+                    this.OnigiriCount--;
+                    Vector2 pos = this.isFacingRight ? new Vector2(this.TranslatedHitbox.Right, this.Position.Y) 
+                                   : new Vector2(this.TranslatedHitbox.Left - ProjectileOnigiri.Width, this.Position.Y);
+                    GameData.Instance.CurrentLevel.AddObject(new ProjectileOnigiri(pos, this.isFacingRight));
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.C) && GameData.Instance.lastKeyboardState.IsKeyUp(Keys.C))
@@ -216,7 +228,7 @@ namespace Nekonigiri
             Rectangle horizontalHitbox = temp, verticalHitbox = temp;
             horizontalHitbox.Offset((int)Math.Ceiling(Velocity.X), 0);
             verticalHitbox.Offset(0, (int)Math.Ceiling(Velocity.Y));
-            foreach (IGameObject entity in GameData.Instance.Level.objectsCloseTo(this))
+            foreach (IGameObject entity in GameData.Instance.CurrentLevel.ObjectsCloseTo(this))
             {
                 if (entity.IsCollideable)
                 {
@@ -273,7 +285,7 @@ namespace Nekonigiri
             }
 
             this.sprite.Position = Position;
-            this.sprite.SpriteEffects = this.playerFacingRight ? SpriteEffects.FlipHorizontally
+            this.sprite.SpriteEffects = this.isFacingRight ? SpriteEffects.FlipHorizontally
                                                                      : SpriteEffects.None;
             this.sprite.Update(gameTime);
         }

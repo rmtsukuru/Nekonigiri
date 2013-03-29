@@ -32,6 +32,12 @@ namespace Nekonigiri
             set;
         }
 
+        public Vector2 Origin
+        {
+            get;
+            set;
+        }
+
         public float Rotation
         {
             get;
@@ -62,6 +68,7 @@ namespace Nekonigiri
             this.ResetFrames();
             this.Position = Vector2.Zero;
             this.Scale = 1;
+            this.Origin = Vector2.Zero;
             this.Rotation = 0;
             this.SpriteEffects = SpriteEffects.None;
             this.LayerDepth = 0.5f;
@@ -91,7 +98,7 @@ namespace Nekonigiri
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.Draw(this.Texture, this.Position, null, Color.White, this.Rotation, Vector2.Zero, this.Scale, this.SpriteEffects, this.LayerDepth);
+            spriteBatch.Draw(this.Texture, this.Position, null, Color.White, this.Rotation, this.Origin, this.Scale, this.SpriteEffects, this.LayerDepth);
         }
 
     }

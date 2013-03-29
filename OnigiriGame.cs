@@ -60,7 +60,7 @@ namespace Nekonigiri
             GameData.Instance.Content = this.Content;
             GameData.Instance.game = this;
             GameData.Instance.lastKeyboardState = Keyboard.GetState();
-            GameData.Instance.Level = this;
+            GameData.Instance.CurrentLevel = this;
 
             this.player = new Neko();
 
@@ -224,10 +224,15 @@ namespace Nekonigiri
             spriteBatch.Draw(overlay, overlayPos, Color.White);
         }
 
-        public IList<IGameObject> objectsCloseTo(IGameObject entity)
+        public IList<IGameObject> ObjectsCloseTo(IGameObject entity)
         {
             return gameObjects;
             // TODO: Refactor this so it actually just gets nearby objects and is thus efficient.
+        }
+
+        public void AddObject(IGameObject entity)
+        {
+            this.gameObjects.Add(entity);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Nekonigiri
             set;
         }
 
-        public ILevel Level
+        public ILevel CurrentLevel
         {
             get;
             set;
