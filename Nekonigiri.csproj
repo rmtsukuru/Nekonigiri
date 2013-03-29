@@ -88,6 +88,7 @@
     <Compile Include="Entity\Damageable.cs" />
     <Compile Include="Entity\Faction.cs" />
     <Compile Include="Entity\HealthPack.cs" />
+    <Compile Include="Entity\InvisibleWall.cs" />
     <Compile Include="ILevel.cs" />
     <Compile Include="Entity\Neko.cs" />
     <Compile Include="GameData.cs" />

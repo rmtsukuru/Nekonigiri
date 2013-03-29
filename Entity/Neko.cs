@@ -246,21 +246,6 @@ namespace Nekonigiri
 
             base.Update(gameTime);
 
-            // Adjusting for window bounds
-            if (Position.Y + this.sprite.Texture.Height > OnigiriGame.WindowHeight)
-            {
-                Position = new Vector2(Position.X, OnigiriGame.WindowHeight - this.sprite.Texture.Height);
-                this.playerFalling = false;
-            }
-            if (Position.X + playerHitbox.X < 0)
-            {
-                Position = new Vector2(-1 * playerHitbox.X, Position.Y);
-            }
-            if (Position.X + playerHitbox.Width > OnigiriGame.WindowWidth)
-            {
-                Position = new Vector2(OnigiriGame.WindowWidth - playerHitbox.Width, Position.Y);
-            }
-
             // Set correct sprite
             if (this.playerMoving && this.sprite != walkingSprite)
             {

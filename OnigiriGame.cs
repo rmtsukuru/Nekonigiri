@@ -97,6 +97,12 @@ namespace Nekonigiri
             this.gameObjects.Add(new Block(240, 180));
             this.gameObjects.Add(new Block(50, 50));
             this.gameObjects.Add(new HealthPack(new Vector2(245, 147)));
+
+            // Level boundaries
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(0, WindowHeight, WindowWidth, 1)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(-1, -300, 1, WindowHeight + 300)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(WindowWidth, -300, 1, WindowHeight + 300)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(0, -301, WindowWidth, 1)));
         }
 
         /// <summary>
