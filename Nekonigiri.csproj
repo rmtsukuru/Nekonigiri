@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Entity\Block.cs" />
     <Compile Include="Entity\Damageable.cs" />
+    <Compile Include="Entity\DestroyableBlock.cs" />
     <Compile Include="Entity\Faction.cs" />
     <Compile Include="Entity\HealthPack.cs" />
     <Compile Include="Entity\InvisibleWall.cs" />

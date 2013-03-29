@@ -91,8 +91,8 @@ namespace Nekonigiri
             this.gameObjects.Add(this.player);
             this.gameObjects.Add(new Block(300, 432));
             this.gameObjects.Add(new Block(180, 432));
-            this.gameObjects.Add(new Block(500, 432));
-            this.gameObjects.Add(new Block(548, 432));
+            this.gameObjects.Add(new DestroyableBlock(500, 432));
+            this.gameObjects.Add(new DestroyableBlock(548, 432));
             this.gameObjects.Add(new Block(380, 300));
             this.gameObjects.Add(new Block(240, 180));
             this.gameObjects.Add(new Block(50, 50));
