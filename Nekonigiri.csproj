@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\BlackHole.cs" />
     <Compile Include="Entity\Block.cs" />
     <Compile Include="Entity\Damageable.cs" />
     <Compile Include="Entity\DestroyableBlock.cs" />
