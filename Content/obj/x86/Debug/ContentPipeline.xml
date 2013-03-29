@@ -271,6 +271,15 @@
       <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\bar_underlay.xnb</Output>
       <Time>2013-02-12T23:42:52.6660456-05:00</Time>
     </Item>
+    <Item>
+      <Source>healthpack.png</Source>
+      <Name>healthpack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\healthpack.xnb</Output>
+      <Time>2013-03-28T20:49:58.5510064-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

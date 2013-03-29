@@ -62,7 +62,7 @@ namespace Nekonigiri
         /// <summary>
         /// Inflicts the specified amount of damage.
         /// </summary>
-        /// <param name="amount">Amount of damage to cause.</param>
+        /// <param name="amount">Amount of damage to cause (can be negative).</param>
         public void Damage(int amount)
         {
             this.Health -= amount;
@@ -77,8 +77,20 @@ namespace Nekonigiri
         }
 
         /// <summary>
+        /// Heals the specified amount of damage.
+        /// </summary>
+        /// <param name="amount">Amount of damage to heal.</param>
+        public void Heal(int amount)
+        {
+            this.Damage(-1 * amount);
+        }
+
+        /// <summary>
         /// Destroys this entity, as its health has run out.
         /// </summary>
-        public abstract void Destroy();
+        public virtual void Destroy()
+        {
+            this.Destroyed = true;
+        }
     }
 }

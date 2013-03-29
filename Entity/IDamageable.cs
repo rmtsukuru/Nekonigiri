@@ -35,5 +35,16 @@ namespace Nekonigiri
         /// </summary>
         /// <param name="amount">Amount of damage to cause.</param>
         void Damage(int amount);
+
+        /// <summary>
+        /// Heals the specified amount of damage.
+        /// </summary>
+        /// <param name="amount">Amount of damage to heal.</param>
+        void Heal(int amount);
+
+        /// <summary>
+        /// Destroys this entity, as its health has run out.
+        /// </summary>
+        void Destroy();
     }
 }

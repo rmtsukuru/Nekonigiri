@@ -104,7 +104,10 @@ namespace Nekonigiri
 
         public override void Touches(IGameObject entity)
         {
-            // TODO: Put player collision-y stuff here.
+            if (entity is HealthPack)
+            {
+                this.Heal((entity as HealthPack).HealAmount);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -203,8 +206,6 @@ namespace Nekonigiri
             verticalHitbox.Offset(0, (int)Math.Ceiling(Velocity.Y));
             foreach (IGameObject entity in GameData.Instance.Level.objectsCloseTo(this))
             {
-                entity.Update(gameTime);
-
                 if (entity.IsCollideable)
                 {
                     if (entity.TranslatedHitbox.Intersects(verticalHitbox))

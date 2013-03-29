@@ -48,6 +48,15 @@ namespace Nekonigiri
         }
 
         /// <summary>
+        /// Indicates whether this game object has been destroyed (so as to 
+        /// determine when to remove it from the game objects list).
+        /// </summary>
+        bool Destroyed
+        {
+            get;
+        }
+
+        /// <summary>
         /// Responds to this object coming in contact with another game object.
         /// </summary>
         /// <param name="entity">The other entity being touched.</param>

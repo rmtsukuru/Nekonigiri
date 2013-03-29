@@ -87,6 +87,7 @@ namespace Nekonigiri
             this.lowHpBarOverlay = Content.Load<Texture2D>("bar41");
             this.onigiriIconSprite = new Sprite(Content.Load<Texture2D>("o"));
 
+            this.gameObjects.Add(this.player);
             this.gameObjects.Add(new Block(300, 432));
             this.gameObjects.Add(new Block(180, 432));
             this.gameObjects.Add(new Block(500, 432));
@@ -94,6 +95,7 @@ namespace Nekonigiri
             this.gameObjects.Add(new Block(380, 300));
             this.gameObjects.Add(new Block(240, 180));
             this.gameObjects.Add(new Block(50, 50));
+            this.gameObjects.Add(new HealthPack(new Vector2(245, 147)));
         }
 
         /// <summary>
@@ -117,8 +119,25 @@ namespace Nekonigiri
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            
-            this.player.Update(gameTime);
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].Update(gameTime);
+
+                // Check if this object is touching any other(s) and evaluate accordingly.
+                for (int j = i + 1; j < gameObjects.Count; j++)
+                {
+                    if (gameObjects[i].TranslatedHitbox.Intersects(gameObjects[j].TranslatedHitbox))
+                    {
+                        gameObjects[i].Touches(gameObjects[j]);
+                        gameObjects[j].Touches(gameObjects[i]);
+                    }
+                }
+                if (gameObjects[i].Destroyed)
+                {
+                    gameObjects.RemoveAt(i);
+                    i--; // Reset index so that next entry is not skipped.
+                }
+            }
 
             this.UpdateHUD(gameTime);
 
@@ -157,7 +176,6 @@ namespace Nekonigiri
             spriteBatch.Begin();
             
             this.DrawBackground(spriteBatch, gameTime);
-            //this.currentPlayerSprite.Draw(spriteBatch, gameTime);
             this.player.Draw(spriteBatch, gameTime);
             foreach (IGameObject entity in this.gameObjects)
             {

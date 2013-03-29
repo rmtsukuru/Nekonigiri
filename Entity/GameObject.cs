@@ -44,6 +44,12 @@ namespace Nekonigiri
             private set;
         }
 
+        public bool Destroyed
+        {
+            get;
+            protected set;
+        }
+
         public GameObject(Sprite sprite, bool collideable)
         {
             this.sprite = sprite;
