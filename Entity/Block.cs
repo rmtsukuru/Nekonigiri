@@ -19,7 +19,7 @@ namespace Nekonigiri
         }
 
         public Block(Vector2 position)
-            : base(new Sprite(GameData.Instance.Content.Load<Texture2D>("block")), true)
+            : base(new Sprite(GameData.Instance.Content.Load<Texture2D>("blktrans")), true)
         {
             this.Position = position;
         }

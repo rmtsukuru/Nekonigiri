@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 
 namespace Nekonigiri
 {
@@ -14,6 +15,12 @@ namespace Nekonigiri
         }
 
         public Game game;
+
+        public KeyboardState lastKeyboardState
+        {
+            get;
+            set;
+        }
 
         public ILevel Level
         {

@@ -280,6 +280,33 @@
       <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\healthpack.xnb</Output>
       <Time>2013-03-28T20:49:58.5510064-04:00</Time>
     </Item>
+    <Item>
+      <Source>iceblock.png</Source>
+      <Name>iceblock</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\iceblock.xnb</Output>
+      <Time>2013-03-28T21:47:09.3572373-04:00</Time>
+    </Item>
+    <Item>
+      <Source>blk.png</Source>
+      <Name>blk</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\blk.xnb</Output>
+      <Time>2013-03-28T22:01:04.0239775-04:00</Time>
+    </Item>
+    <Item>
+      <Source>blktrans.png</Source>
+      <Name>blktrans</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\blktrans.xnb</Output>
+      <Time>2013-03-28T22:07:46.4969977-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

@@ -19,6 +19,8 @@ namespace Nekonigiri
         private const int StartingMaxHealth = 100;
         private const int StartingMaxOnigiri = 50;
 
+        private const int OnigiriHealAmount = 10;
+
         const float PlayerMovementSpeed = 4;
         const float PlayerInertiaAcceleration = 0.3f;
         const float PlayerRunSpeedMultiplier = 2;
@@ -145,6 +147,7 @@ namespace Nekonigiri
                 }
             }
 
+            // TODO: Get trigger input for this working.
             if (Keyboard.GetState().IsKeyDown(Keys.Z) && !this.playerJumping && !this.playerFalling)
             {
                 this.playerJumping = true;
@@ -167,6 +170,15 @@ namespace Nekonigiri
             else
             {
                 this.playerRunning = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.C) && GameData.Instance.lastKeyboardState.IsKeyUp(Keys.C))
+            {
+                if (this.OnigiriCount > 0 && this.Health < this.MaxHealth)
+                {
+                    this.OnigiriCount--;
+                    this.Heal(OnigiriHealAmount);
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.OemPlus))

@@ -59,6 +59,7 @@ namespace Nekonigiri
         {
             GameData.Instance.Content = this.Content;
             GameData.Instance.game = this;
+            GameData.Instance.lastKeyboardState = Keyboard.GetState();
             GameData.Instance.Level = this;
 
             this.player = new Neko();
@@ -138,6 +139,8 @@ namespace Nekonigiri
                     i--; // Reset index so that next entry is not skipped.
                 }
             }
+
+            GameData.Instance.lastKeyboardState = Keyboard.GetState();
 
             this.UpdateHUD(gameTime);
 
