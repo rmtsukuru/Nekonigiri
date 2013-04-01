@@ -180,6 +180,7 @@ namespace Nekonigiri
                     this.OnigiriCount--;
                     Vector2 pos = this.isFacingRight ? new Vector2(this.TranslatedHitbox.Right, this.Position.Y) 
                                    : new Vector2(this.TranslatedHitbox.Left - ProjectileOnigiri.Width, this.Position.Y);
+                    pos = new Vector2(pos.X + Velocity.X, pos.Y + Velocity.Y);
                     GameData.Instance.CurrentLevel.AddObject(new ProjectileOnigiri(pos, this.isFacingRight));
                 }
             }
