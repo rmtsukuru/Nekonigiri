@@ -194,6 +194,7 @@ namespace Nekonigiri
                 }
             }
 
+            // Debug commands
             if (Keyboard.GetState().IsKeyDown(Keys.OemPlus))
             {
                 this.Damage(-1);
@@ -201,6 +202,10 @@ namespace Nekonigiri
             if (Keyboard.GetState().IsKeyDown(Keys.OemMinus))
             {
                 this.Damage(1);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                this.OnigiriCount = this.MaxOnigiri;
             }
 
             // Jump Physics
