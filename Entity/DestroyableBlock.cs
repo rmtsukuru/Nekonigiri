@@ -9,7 +9,7 @@ namespace Nekonigiri
 {
     internal class DestroyableBlock : Damageable
     {
-        private const int MaxHP = 20;
+        private const int MaxHP = 10;
 
         public DestroyableBlock()
             : this(0, 0)

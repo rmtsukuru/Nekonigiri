@@ -21,6 +21,8 @@ namespace Nekonigiri
         internal const int WindowWidth = 640;
         internal const int WindowHeight = 480;
 
+        internal const bool Debug = true;
+
         const int HudIconPadding = 10;
 
         GraphicsDeviceManager graphics;
@@ -57,6 +59,7 @@ namespace Nekonigiri
         /// </summary>
         protected override void Initialize()
         {
+            GameData.Instance.Debug = Debug;
             GameData.Instance.Content = this.Content;
             GameData.Instance.game = this;
             GameData.Instance.lastKeyboardState = Keyboard.GetState();

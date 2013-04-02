@@ -8,6 +8,12 @@ namespace Nekonigiri
 {
     internal class GameData
     {
+        public bool Debug
+        {
+            get;
+            set;
+        }
+
         public ContentManager Content
         {
             get;
