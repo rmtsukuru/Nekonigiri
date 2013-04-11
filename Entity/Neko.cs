@@ -149,7 +149,8 @@ namespace Nekonigiri
             }
 
             // TODO: Get trigger input for this working.
-            if (Keyboard.GetState().IsKeyDown(Keys.Z) && !this.playerJumping && !this.playerFalling)
+            if (Keyboard.GetState().IsKeyDown(Keys.Z) && 
+                ((!this.playerJumping && !this.playerFalling) || GameData.Instance.Debug))
             {
                 this.playerJumping = true;
                 this.remainingJumpTime = PlayerMaxJumpTime;
@@ -215,7 +216,11 @@ namespace Nekonigiri
             if (playerJumping)
             {
                 Velocity = new Vector2(Velocity.X, -1 * PlayerJumpSpeed);
-                this.remainingJumpTime -= gameTime.ElapsedGameTime.TotalSeconds;
+                // Moonwalk
+                if (!GameData.Instance.Debug)
+                {
+                    this.remainingJumpTime -= gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 if (this.remainingJumpTime <= 0)
                 {
                     this.playerJumping = false;

@@ -21,7 +21,8 @@ namespace Nekonigiri
         internal const int WindowWidth = 640;
         internal const int WindowHeight = 480;
 
-        internal const bool Debug = true;
+        internal const bool Admin = true; // Determines whether debug mode can be turned on and off.
+        internal const bool Debug = false;
 
         const int HudIconPadding = 10;
 
@@ -128,6 +129,12 @@ namespace Nekonigiri
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.OemTilde) && 
+                GameData.Instance.lastKeyboardState.IsKeyUp(Keys.OemTilde) && Admin)
+            {
+                GameData.Instance.Debug = !GameData.Instance.Debug;
+            }
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
