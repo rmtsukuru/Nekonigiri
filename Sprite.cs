@@ -26,6 +26,12 @@ namespace Nekonigiri
             set;
         }
 
+        public Rectangle? SourceRectangle
+        {
+            get;
+            set;
+        }
+
         public float Scale
         {
             get;
@@ -67,6 +73,7 @@ namespace Nekonigiri
             this.framesPerSecond = framerate;
             this.ResetFrames();
             this.Position = Vector2.Zero;
+            this.SourceRectangle = null;
             this.Scale = 1;
             this.Origin = Vector2.Zero;
             this.Rotation = 0;
@@ -96,9 +103,11 @@ namespace Nekonigiri
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.Draw(this.Texture, this.Position, null, Color.White, this.Rotation, this.Origin, this.Scale, this.SpriteEffects, this.LayerDepth);
+            spriteBatch.Draw(this.Texture, this.Position, this.SourceRectangle, 
+                             Color.White, this.Rotation, this.Origin, this.Scale, 
+                             this.SpriteEffects, this.LayerDepth);
         }
 
     }

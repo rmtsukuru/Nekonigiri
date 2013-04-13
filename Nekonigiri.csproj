@@ -91,6 +91,8 @@
     <Compile Include="Entity\Faction.cs" />
     <Compile Include="Entity\HealthPack.cs" />
     <Compile Include="Entity\InvisibleWall.cs" />
+    <Compile Include="Entity\Tile.cs" />
+    <Compile Include="LevelMap.cs" />
     <Compile Include="Entity\ProjectileOnigiri.cs" />
     <Compile Include="ILevel.cs" />
     <Compile Include="Entity\Neko.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="OnigiriGame.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="Tileset.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

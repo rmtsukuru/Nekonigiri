@@ -316,6 +316,15 @@
       <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\blank.xnb</Output>
       <Time>2013-03-28T23:05:57.873693-04:00</Time>
     </Item>
+    <Item>
+      <Source>tiles.png</Source>
+      <Name>tiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sam\Documents\dev\cs\msvcs\Nekonigiri\bin\x86\Debug\Content\tiles.xnb</Output>
+      <Time>2013-04-10T22:53:44.3000501-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
