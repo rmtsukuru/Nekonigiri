@@ -94,7 +94,7 @@ namespace Nekonigiri
 
             this.gameObjects.Add(this.player);
 
-            IList<IGameObject> tiles = LevelMap.LoadTiles(LevelMap.GetLevelOne(), Tileset.GetDefaultTilemap());
+            IList<IGameObject> tiles = LevelMap.LoadTiles(LevelMap.GetLevelText(1), Tileset.GetDefaultTilemap());
             foreach (IGameObject tile in tiles)
             {
                 this.gameObjects.Add(tile);

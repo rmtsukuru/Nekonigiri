@@ -88,20 +88,27 @@ namespace Nekonigiri
             }
         }
 
-        public static int[][] GetLevelOne()
+        public static String GetLevelText(int level)
         {
-            int[][] levelOne = new int[10][];
-            levelOne[0] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            levelOne[1] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            levelOne[2] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, 39, 40, 41, -1 };
-            levelOne[3] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            levelOne[4] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-            levelOne[5] = new int[] { -1, -1, -1, -1, -1, 0, 1, 1, 2, -1, -1, -1, -1 };
-            levelOne[6] = new int[] { -1, -1, -1, -1, -1, 9, 10, 10, 11, -1, -1, -1, -1 };
-            levelOne[7] = new int[] { -1, -1, 42, 44, -1, 9, 10, 10, 11, -1, -1, 21, -1 };
-            levelOne[8] = new int[] { -1, -1, 51, 53, -1, 9, 10, 10, 11, -1, -1, -1, -1 };
-            levelOne[9] = new int[] { -1, -1, 51, 53, -1, 9, 10, 10, 11, -1, 22, -1, -1 };
-            return levelOne;
+            StringBuilder s = new StringBuilder();
+            switch (level)
+            {
+                case 1:
+                    s.AppendLine("             ");
+                    s.AppendLine("             ");
+                    s.AppendLine("         nop ");
+                    s.AppendLine("             ");
+                    s.AppendLine("             ");
+                    s.AppendLine("     ABBC    ");
+                    s.AppendLine("     JKKL    ");
+                    s.AppendLine("  qs JKKL  V ");
+                    s.AppendLine("  z\" JKKL    ");
+                        s.Append("  z\" JKKL W  ");
+                    return s.ToString();
+
+                default:
+                    return "";
+            }
         }
     }
 }
