@@ -14,6 +14,7 @@ namespace Nekonigiri
         Vector2 Position
         {
             get;
+            set;
         }
 
         Vector2 Velocity

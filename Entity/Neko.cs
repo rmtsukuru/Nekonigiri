@@ -15,8 +15,8 @@ namespace Nekonigiri
         readonly Rectangle DefaultPlayerHitbox = new Rectangle(13, 0, 39, 64);
 
         // TODO: Get rid of "player" in all of these freaking names.
-        const float PlayerStartingX = 300;
-        const float PlayerStartingY = 250;
+        const float StartingX = 300;
+        const float StartingY = 130;
         private const int StartingMaxHealth = 100;
         private const int StartingMaxOnigiri = 50;
 
@@ -75,7 +75,7 @@ namespace Nekonigiri
             this.MaxOnigiri = maxOnigiri;
             this.OnigiriCount = currentOnigiri;
 
-            this.Position = new Vector2(PlayerStartingX, PlayerStartingY);
+            this.Position = new Vector2(StartingX, StartingY);
             this.Velocity = Vector2.Zero;
 
             this.isFacingRight = false;

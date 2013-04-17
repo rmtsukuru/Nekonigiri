@@ -30,17 +30,27 @@ namespace Nekonigiri
             {
                 for (int j = 0; j < tilespec[i].Length; j++)
                 {
-                    tiles.Add(LoadTile(tilespec[i][j], tileset, new Vector2(tilespec.Length, 
-                                                                       tilespec[0].Length)));
+                    IGameObject tile = LoadTile(tilespec[i][j], tileset);
+                    if (tile != null)
+                    {
+                        tile.Position = new Vector2(j * tileset.TileSize.X, i * tileset.TileSize.Y);
+                        tiles.Add(tile);
+                    }
                 }
             }
             return tiles;
         }
 
-        private static IGameObject LoadTile(int tileNumber, Tileset tileset, Vector2 mapSize)
+        private static IGameObject LoadTile(int tileNumber, Tileset tileset)
         {
-            int x = tileNumber % (int)mapSize.X;
-            int y = tileNumber / (int)mapSize.X;
+            // -1 specifies no tile.
+            if (tileNumber <= -1)
+            {
+                return null;
+            }
+
+            int x = tileNumber % (int)tileset.PassabilityMapping[0].Length;
+            int y = tileNumber / (int)tileset.PassabilityMapping[0].Length;
             return tileset.GetTile(x, y);
         }
 
@@ -76,6 +86,22 @@ namespace Nekonigiri
             {
                 return 0;
             }
+        }
+
+        public static int[][] GetLevelOne()
+        {
+            int[][] levelOne = new int[10][];
+            levelOne[0] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+            levelOne[1] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+            levelOne[2] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, 39, 40, 41, -1 };
+            levelOne[3] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+            levelOne[4] = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+            levelOne[5] = new int[] { -1, -1, -1, -1, -1, 0, 1, 1, 2, -1, -1, -1, -1 };
+            levelOne[6] = new int[] { -1, -1, -1, -1, -1, 9, 10, 10, 11, -1, -1, -1, -1 };
+            levelOne[7] = new int[] { -1, -1, 42, 44, -1, 9, 10, 10, 11, -1, -1, 21, -1 };
+            levelOne[8] = new int[] { -1, -1, 51, 53, -1, 9, 10, 10, 11, -1, -1, -1, -1 };
+            levelOne[9] = new int[] { -1, -1, 51, 53, -1, 9, 10, 10, 11, -1, 22, -1, -1 };
+            return levelOne;
         }
     }
 }

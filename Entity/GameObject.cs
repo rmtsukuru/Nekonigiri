@@ -14,7 +14,7 @@ namespace Nekonigiri
         public Vector2 Position
         {
             get;
-            protected set;
+            set;
         }
 
         public Vector2 Velocity

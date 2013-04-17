@@ -20,8 +20,19 @@ namespace Nekonigiri
     internal class Tileset
     {
         private Texture2D bitmap;
-        private Vector2 tileSize;
-        private int[][] passabilityMapping;
+
+
+        public Vector2 TileSize
+        {
+            get;
+            private set;
+        }
+
+        public int[][] PassabilityMapping
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Instantiates a new tileset with the specified properties.
@@ -34,15 +45,15 @@ namespace Nekonigiri
         public Tileset(string bitmapFilename, int[][] passabilityMapping)
         {
             this.bitmap = GameData.Instance.Content.Load<Texture2D>(bitmapFilename);
-            this.passabilityMapping = passabilityMapping;
-            this.tileSize = new Vector2(this.bitmap.Width / passabilityMapping.Length,
-                                  this.bitmap.Height / passabilityMapping[0].Length);
+            this.PassabilityMapping = passabilityMapping;
+            this.TileSize = new Vector2(this.bitmap.Width / passabilityMapping[0].Length,
+                                  this.bitmap.Height / passabilityMapping.Length);
         }
 
         public Tile GetTile(int x, int y)
         {
-            Rectangle sourceRect = new Rectangle(x * (int)tileSize.X, y * (int)tileSize.Y, (int)tileSize.X, (int)tileSize.Y);
-            return new Tile(bitmap, sourceRect, GetPassabilityHitbox(passabilityMapping[x][y], tileSize));
+            Rectangle sourceRect = new Rectangle(x * (int)TileSize.X, y * (int)TileSize.Y, (int)TileSize.X, (int)TileSize.Y);
+            return new Tile(bitmap, sourceRect, GetPassabilityHitbox(PassabilityMapping[y][x], TileSize));
         }
 
         public Tile GetTile(Vector2 pos)
@@ -69,6 +80,18 @@ namespace Nekonigiri
                 default:
                     return new Rectangle(0, 0, (int)tileSize.X, (int)tileSize.Y);
             }
+        }
+
+        public static Tileset GetDefaultTilemap()
+        {
+            int[][] mapping = new int[6][];
+            mapping[0] = new int[] { 0, 0, 0, -1, -1, -1, -1, -1, -1 };
+            mapping[1] = new int[] { 0, 0, 0, 0, 0, 0, -1, -1, -1 };
+            mapping[2] = new int[] { 0, 0, 0, 0, -1, -1, -1, -1, -1 };
+            mapping[3] = new int[] { 0, 0, 0, -1, 0, -1, -1, -1, -1 };
+            mapping[4] = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            mapping[5] = new int[] { -1, -1, -1, -1, -1, -1, 0, 0, 0 };
+            return new Tileset("tiles", mapping);
         }
     }
 }
