@@ -19,10 +19,14 @@ namespace Nekonigiri
         { }
 
         public HealthPack(Vector2 position)
-            : this(HealthPack.BaseHealAmount, position)
+            : this(position, HealthPack.BaseHealAmount)
         { }
 
-        public HealthPack(int healAmount, Vector2 position) : base(FetchSprite(), false)
+        public HealthPack(Vector2 position, string healAmount)
+            : this(position, Int32.Parse(healAmount))
+        { }
+
+        public HealthPack(Vector2 position, int healAmount) : base(FetchSprite(), false)
         {
             this.HealAmount = healAmount;
             this.Position = position;

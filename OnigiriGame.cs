@@ -100,6 +100,12 @@ namespace Nekonigiri
                 this.gameObjects.Add(tile);
             }
 
+            IList<IGameObject> entities = LevelMap.LoadEntities(FileLoader.LoadXml("testlevel.xml"));
+            foreach (IGameObject entity in entities)
+            {
+                this.gameObjects.Add(entity);
+            }
+
             // Level boundaries
             this.gameObjects.Add(new InvisibleWall(new Rectangle(0, WindowHeight, WindowWidth, 1)));
             this.gameObjects.Add(new InvisibleWall(new Rectangle(-1, -300, 1, WindowHeight + 300)));

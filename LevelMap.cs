@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using System.Xml;
 
 namespace Nekonigiri
 {
     internal class LevelMap
     {
+        private static Dictionary<string, Type> entityTypeIdentifiers;
+
         public static IList<IGameObject> LoadTiles(String tilespec, Tileset tileset)
         {
             string[] lines = tilespec.Split(new string[]{Environment.NewLine}, StringSplitOptions.None);
@@ -39,6 +42,65 @@ namespace Nekonigiri
                 }
             }
             return tiles;
+        }
+
+        public static IList<IGameObject> LoadEntities(XmlDocument level)
+        {
+            IList<IGameObject> entities = new List<IGameObject>(level.FirstChild.ChildNodes.Count);
+
+            foreach (XmlNode node in level.FirstChild.ChildNodes)
+            {
+                switch (node.Name)
+                {
+                    case "entity":
+                        String typeNamespace = "Nekonigiri";
+                        Type type = null;
+                        List<Type> parameterTypes = new List<Type>();
+                        parameterTypes.Add(typeof(Vector2)); // Position
+                        List<Object> parameters = new List<Object>();
+                        parameters.Add(null);
+                        Vector2 position = Vector2.Zero;
+                        foreach (XmlAttribute attribute in node.Attributes)
+                        {
+                            switch (attribute.Name)
+                            {
+                                case "namespace":
+                                    typeNamespace = attribute.Value;
+                                    break;
+
+                                case "type":
+                                    if (entityTypeIdentifiers.ContainsKey(attribute.Value))
+                                    {
+                                        type = entityTypeIdentifiers[attribute.Value];
+                                    }
+                                    else
+                                    {
+                                        type = Type.GetType(typeNamespace + "." + attribute.Value);
+                                    }
+                                    break;
+
+                                case "x":
+                                    position.X = float.Parse(attribute.Value);
+                                    break;
+
+                                case "y":
+                                    position.Y = float.Parse(attribute.Value);
+                                    break;
+
+                                default:
+                                    parameterTypes.Add(typeof(String));
+                                    parameters.Add(attribute.Value);
+                                    break;
+                            }
+                        }
+                        parameters[0] = position;
+                        entities.Add((IGameObject)type.GetConstructor(parameterTypes.ToArray()).Invoke(parameters.ToArray()));
+                        break;
+
+                }
+            }
+
+            return entities;
         }
 
         private static IGameObject LoadTile(int tileNumber, Tileset tileset)
@@ -88,27 +150,10 @@ namespace Nekonigiri
             }
         }
 
-        public static String GetLevelText(int level)
+        static LevelMap()
         {
-            StringBuilder s = new StringBuilder();
-            switch (level)
-            {
-                case 1:
-                    s.AppendLine("             ");
-                    s.AppendLine("             ");
-                    s.AppendLine("         nop ");
-                    s.AppendLine("             ");
-                    s.AppendLine("             ");
-                    s.AppendLine("     ABBC    ");
-                    s.AppendLine("     JKKL    ");
-                    s.AppendLine("  qs JKKL  V ");
-                    s.AppendLine("  z\" JKKL    ");
-                        s.Append("  z\" JKKL W  ");
-                    return s.ToString();
-
-                default:
-                    return "";
-            }
+            entityTypeIdentifiers = new Dictionary<string, Type>();
+            entityTypeIdentifiers.Add("health", typeof(HealthPack));
         }
     }
 }
