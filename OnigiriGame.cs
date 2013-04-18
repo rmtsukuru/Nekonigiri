@@ -92,13 +92,13 @@ namespace Nekonigiri
             this.lowHpBarOverlay = Content.Load<Texture2D>("bar41");
             this.onigiriIconSprite = new Sprite(Content.Load<Texture2D>("o"));
 
-            this.gameObjects.Add(this.player);
-
-            IList<IGameObject> tiles = LevelMap.LoadTiles(FileLoader.ReadAllText("testlevel.txt"), Tileset.GetDefaultTilemap());
+            IList<IGameObject> tiles = LevelMap.LoadTiles(FileLoader.ReadAllText("testlevel.txt"), Tileset.GetDefaultTileset());
             foreach (IGameObject tile in tiles)
             {
                 this.gameObjects.Add(tile);
             }
+
+            this.gameObjects.Add(this.player);
 
             IList<IGameObject> entities = LevelMap.LoadEntities(FileLoader.LoadXml("testlevel.xml"));
             foreach (IGameObject entity in entities)

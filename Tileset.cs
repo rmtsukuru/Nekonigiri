@@ -82,7 +82,7 @@ namespace Nekonigiri
             }
         }
 
-        public static Tileset GetDefaultTilemap()
+        public static Tileset GetDefaultTileset()
         {
             int[][] mapping = new int[6][];
             mapping[0] = new int[] { 0, 0, 0, -1, -1, -1, -1, -1, -1 };

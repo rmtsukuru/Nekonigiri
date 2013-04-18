@@ -1,6 +1,5 @@
-<level name="Testbed">
+<level name="Testbed" tileset="tiles">
   <entity type="HealthPack" healAmount="45" x="120" y="100" />
   <entity type="health" healAmount="30" x="600" y="450" />
   <entity type="DestroyableBlock" x="0" y="432" />
-  <entity type="Cat" />
 </level>
