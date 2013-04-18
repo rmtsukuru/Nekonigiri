@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
-using System.IO;
 
 namespace Nekonigiri
 {
@@ -95,7 +94,7 @@ namespace Nekonigiri
 
             this.gameObjects.Add(this.player);
 
-            IList<IGameObject> tiles = LevelMap.LoadTiles(File.ReadAllText("testlevel.txt"), Tileset.GetDefaultTilemap());
+            IList<IGameObject> tiles = LevelMap.LoadTiles(FileLoader.ReadAllText("testlevel.txt"), Tileset.GetDefaultTilemap());
             foreach (IGameObject tile in tiles)
             {
                 this.gameObjects.Add(tile);
