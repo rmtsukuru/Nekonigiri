@@ -86,11 +86,14 @@
   <ItemGroup>
     <Compile Include="Entity\BlackHole.cs" />
     <Compile Include="Entity\Block.cs" />
+    <Compile Include="Entity\Camera.cs" />
     <Compile Include="Entity\Damageable.cs" />
     <Compile Include="Entity\DestroyableBlock.cs" />
     <Compile Include="Entity\Faction.cs" />
     <Compile Include="Entity\HealthPack.cs" />
+    <Compile Include="Entity\ICamera.cs" />
     <Compile Include="Entity\InvisibleWall.cs" />
+    <Compile Include="Entity\TargetedCamera.cs" />
     <Compile Include="Entity\Tile.cs" />
     <Compile Include="FileLoader.cs" />
     <Compile Include="LevelMap.cs" />

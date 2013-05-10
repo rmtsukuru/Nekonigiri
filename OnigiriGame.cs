@@ -54,6 +54,7 @@ namespace Nekonigiri
         Sprite onigiriIconSprite;
 
         Neko player;
+        ICamera camera;
 
         IList<IGameObject> gameObjects;
 
@@ -80,6 +81,7 @@ namespace Nekonigiri
             GameData.Instance.CurrentLevel = this;
 
             this.player = new Neko();
+            this.camera = new TargetedCamera(this.player);
 
             this.gameObjects = new List<IGameObject>();
 
@@ -120,10 +122,10 @@ namespace Nekonigiri
             }
 
             // Level boundaries
-            this.gameObjects.Add(new InvisibleWall(new Rectangle(0, WindowHeight, WindowWidth, 1)));
-            this.gameObjects.Add(new InvisibleWall(new Rectangle(-1, -300, 1, WindowHeight + 300)));
-            this.gameObjects.Add(new InvisibleWall(new Rectangle(WindowWidth, -300, 1, WindowHeight + 300)));
-            this.gameObjects.Add(new BlackHole(new Rectangle(0, -301, WindowWidth, 1)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(0, LevelHeight, LevelWidth, 1)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(-1, -300, 1, LevelHeight + 300)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(LevelWidth, -300, 1, LevelHeight + 300)));
+            this.gameObjects.Add(new BlackHole(new Rectangle(0, -301, LevelWidth, 1)));
         }
 
         /// <summary>
@@ -173,6 +175,8 @@ namespace Nekonigiri
                 }
             }
 
+            this.camera.Update(gameTime);
+
             GameData.Instance.lastKeyboardState = Keyboard.GetState();
 
             this.UpdateHUD(gameTime);
@@ -212,10 +216,10 @@ namespace Nekonigiri
             spriteBatch.Begin();
             
             this.DrawBackground(spriteBatch, gameTime);
-            this.player.Draw(spriteBatch, gameTime);
+            this.player.Draw(spriteBatch, gameTime, camera);
             foreach (IGameObject entity in this.gameObjects)
             {
-                entity.Draw(spriteBatch, gameTime);
+                entity.Draw(spriteBatch, gameTime, camera);
             }
             this.DrawHUD(spriteBatch, gameTime);
 

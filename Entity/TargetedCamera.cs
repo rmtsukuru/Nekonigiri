@@ -9,7 +9,7 @@ namespace Nekonigiri
     /// <summary>
     /// Implements a camera which tracks a specified object.
     /// </summary>
-    internal class TargetedCamera : ICamera
+    internal class TargetedCamera : Camera
     {
         private const float Acceleration = .5f;
 
@@ -31,24 +31,12 @@ namespace Nekonigiri
 
         private IGameObject target;
 
-        Vector2 Position
-        {
-            get;
-            private set;
-        }
-
-        Vector2 Velocity
-        {
-            get;
-            private set;
-        }
-
-        TargetedCamera(IGameObject target)
+        public TargetedCamera(IGameObject target)
         {
             this.target = target;
         }
 
-        void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             Vector2 position = target.RelativePosition(this);
             if (position.X > OnigiriGame.ScreenCenter.X + FocusWidth)
@@ -61,6 +49,13 @@ namespace Nekonigiri
                 this.Velocity = new Vector2(Math.Max(this.Velocity.X - Acceleration, -1 * MaxVelocity),
                                             this.Velocity.Y);
             }
+            // If not tracking target, decelerate.
+            else if (Math.Abs(this.Velocity.X) > 0)
+            {
+                float x = (Math.Abs(this.Velocity.X) - Acceleration) * 
+                           this.Velocity.X / Math.Abs(this.Velocity.X);
+                this.Velocity = new Vector2(x, this.Velocity.Y);
+            }
 
             if (position.Y > OnigiriGame.ScreenCenter.Y + FocusHeight)
             {
@@ -72,9 +67,39 @@ namespace Nekonigiri
                 this.Velocity = new Vector2(this.Velocity.X,
                                             Math.Max(this.Velocity.Y - Acceleration, -1 * MaxVelocity));
             }
+            // If not tracking target, decelerate.
+            else if (Math.Abs(this.Velocity.Y) > 0) 
+            {
+                float y = (Math.Abs(this.Velocity.Y) - Acceleration) *
+                           this.Velocity.Y / Math.Abs(this.Velocity.Y);
+                this.Velocity = new Vector2(this.Velocity.X, y);
+            }
 
-            this.Position = new Vector2(this.Position.X + this.Velocity.X, 
-                                        this.Position.Y + this.Velocity.Y);
+            base.Update(gameTime);
+
+            if (this.Position.X < 0)
+            {
+                this.Position = new Vector2(0, this.Position.Y);
+                this.Velocity = new Vector2(0, this.Velocity.Y);
+            }
+            else if (this.Position.X + OnigiriGame.WindowWidth > OnigiriGame.LevelWidth)
+            {
+                float x = OnigiriGame.LevelWidth - OnigiriGame.WindowWidth;
+                this.Position = new Vector2(x, this.Position.Y);
+                this.Velocity = new Vector2(0, this.Velocity.Y);
+            }
+
+            if (this.Position.Y < 0)
+            {
+                this.Position = new Vector2(this.Position.X, 0);
+                this.Velocity = new Vector2(this.Velocity.X, 0);
+            }
+            else if (this.Position.Y + OnigiriGame.WindowHeight > OnigiriGame.LevelHeight)
+            {
+                float y = OnigiriGame.LevelHeight - OnigiriGame.WindowHeight;
+                this.Position = new Vector2(this.Position.X, y);
+                this.Velocity = new Vector2(this.Position.X, y);
+            }
         }
     }
 }

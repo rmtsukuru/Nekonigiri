@@ -73,5 +73,7 @@ namespace Nekonigiri
         void Update(GameTime gameTime);
 
         void Draw(SpriteBatch spriteBatch, GameTime gameTime);
+
+        void Draw(SpriteBatch spriteBatch, GameTime gameTime, ICamera camera);
     }
 }
