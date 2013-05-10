@@ -13,7 +13,7 @@ namespace Nekonigiri
     {
         private const float Acceleration = .5f;
 
-        private const float MaxVelocity = 10;
+        private const float MaxVelocity = 4;
 
         /// <summary>
         /// The width, from the center of the screen, to the edge of the camera's focus.

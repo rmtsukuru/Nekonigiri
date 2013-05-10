@@ -1,10 +1,10 @@
-             
-             
-         nop 
-             
-             
-     ABBC    
-     JKKL    
-  qs JKKL  V 
-  z" JKKL    
-  z" JKKL W  
+                    
+                    
+         nop        
+                    
+                    
+     ABBC     nop   
+     JKKL           
+  qs JKKL  V      V 
+  z" JKKL           
+  z" JKKL W    nop  
