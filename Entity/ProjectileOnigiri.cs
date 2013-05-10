@@ -63,6 +63,11 @@ namespace Nekonigiri
                     target.Damage(this.DamageOnHit);
                 }
             }
+
+            if (entity is Neko)
+            {
+                (entity as Neko).OnigiriCount++;
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Nekonigiri
         public int OnigiriCount
         {
             get;
-            private set;
+            set;
         }
 
         public int MaxOnigiri
