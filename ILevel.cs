@@ -11,6 +11,22 @@ namespace Nekonigiri
     internal interface ILevel
     {
         /// <summary>
+        /// Width of this level in pixels.
+        /// </summary>
+        int Width
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Height of this level in pixels.
+        /// </summary>
+        int Height
+        {
+            get;
+        }
+
+        /// <summary>
         /// Returns a list of entities in the level near the specified game object.
         /// </summary>
         /// <param name="entity">The specified entity.</param>

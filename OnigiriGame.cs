@@ -21,8 +21,8 @@ namespace Nekonigiri
         internal const int WindowWidth = 640;
         internal const int WindowHeight = 480;
 
-        internal const int LevelWidth = 700;
-        internal const int LevelHeight = 480;
+        private const int LevelWidth = 700;
+        private const int LevelHeight = 480;
 
         internal const bool Admin = true; // Determines whether debug mode can be turned on and off.
         internal const bool Debug = false;
@@ -37,26 +37,24 @@ namespace Nekonigiri
             }
         }
 
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
-        Vector2 levelSize;
+        private Sprite backgroundSprite;
+        private SpriteFont hudFont;
+        private Texture2D hpBarSprite;
+        private Texture2D hpBarUnderlay;
+        private Texture2D fullHpBarOverlay;
+        private Texture2D highHpBarOverlay;
+        private Texture2D mediumHpBarOverlay;
+        private Texture2D lowHpBarOverlay;
+        private Texture2D currentHpBarOverlay;
+        private Sprite onigiriIconSprite;
 
-        Sprite backgroundSprite;
-        SpriteFont hudFont;
-        Texture2D hpBarSprite;
-        Texture2D hpBarUnderlay;
-        Texture2D fullHpBarOverlay;
-        Texture2D highHpBarOverlay;
-        Texture2D mediumHpBarOverlay;
-        Texture2D lowHpBarOverlay;
-        Texture2D currentHpBarOverlay;
-        Sprite onigiriIconSprite;
+        private Neko player;
+        private ICamera camera;
 
-        Neko player;
-        ICamera camera;
-
-        IList<IGameObject> gameObjects;
+        private IList<IGameObject> gameObjects;
 
         public OnigiriGame()
         {
@@ -112,6 +110,10 @@ namespace Nekonigiri
             {
                 this.gameObjects.Add(tile);
             }
+
+            // TODO: Load this dynamically from map spec file.
+            this.Width = OnigiriGame.LevelWidth;
+            this.Height = OnigiriGame.LevelHeight;
 
             this.gameObjects.Add(this.player);
 
@@ -255,6 +257,19 @@ namespace Nekonigiri
             spriteBatch.Draw(overlay, overlayPos, Color.White);
         }
 
+        #region ILevel Members
+        public int Width
+        {
+            get;
+            private set;
+        }
+
+        public int Height
+        {
+            get;
+            private set;
+        }
+
         public IList<IGameObject> ObjectsCloseTo(IGameObject entity)
         {
             return gameObjects;
@@ -265,5 +280,6 @@ namespace Nekonigiri
         {
             this.gameObjects.Add(entity);
         }
+        #endregion
     }
 }

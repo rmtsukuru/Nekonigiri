@@ -82,9 +82,9 @@ namespace Nekonigiri
                 this.Position = new Vector2(0, this.Position.Y);
                 this.Velocity = new Vector2(0, this.Velocity.Y);
             }
-            else if (this.Position.X + OnigiriGame.WindowWidth > OnigiriGame.LevelWidth)
+            else if (this.Position.X + OnigiriGame.WindowWidth > GameData.Instance.CurrentLevel.Width)
             {
-                float x = OnigiriGame.LevelWidth - OnigiriGame.WindowWidth;
+                float x = GameData.Instance.CurrentLevel.Width - OnigiriGame.WindowWidth;
                 this.Position = new Vector2(x, this.Position.Y);
                 this.Velocity = new Vector2(0, this.Velocity.Y);
             }
@@ -94,9 +94,9 @@ namespace Nekonigiri
                 this.Position = new Vector2(this.Position.X, 0);
                 this.Velocity = new Vector2(this.Velocity.X, 0);
             }
-            else if (this.Position.Y + OnigiriGame.WindowHeight > OnigiriGame.LevelHeight)
+            else if (this.Position.Y + OnigiriGame.WindowHeight > GameData.Instance.CurrentLevel.Height)
             {
-                float y = OnigiriGame.LevelHeight - OnigiriGame.WindowHeight;
+                float y = GameData.Instance.CurrentLevel.Height - OnigiriGame.WindowHeight;
                 this.Position = new Vector2(this.Position.X, y);
                 this.Velocity = new Vector2(this.Position.X, y);
             }
