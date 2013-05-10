@@ -38,6 +38,11 @@ namespace Nekonigiri
             }
         }
 
+        public Vector2 RelativePosition(ICamera camera)
+        {
+            return new Vector2(this.Position.X - camera.Position.X, this.Position.Y - camera.Position.Y);
+        }
+
         public bool IsCollideable
         {
             get;
@@ -73,6 +78,12 @@ namespace Nekonigiri
         public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             this.sprite.Position = this.Position;
+            this.sprite.Draw(spriteBatch, gameTime);
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime, ICamera camera)
+        {
+            this.sprite.Position = this.RelativePosition(camera);
             this.sprite.Draw(spriteBatch, gameTime);
         }
 

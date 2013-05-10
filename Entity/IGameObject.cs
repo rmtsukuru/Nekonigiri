@@ -17,6 +17,13 @@ namespace Nekonigiri
             set;
         }
 
+        /// <summary>
+        /// Gets this game object's position relative to a camera.
+        /// </summary>
+        /// <param name="camera">The specified camera.</param>
+        /// <returns>The relative position coordinates.</returns>
+        Vector2 RelativePosition(ICamera camera);
+
         Vector2 Velocity
         {
             get;

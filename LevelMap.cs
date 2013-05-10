@@ -7,8 +7,19 @@ using System.Xml;
 
 namespace Nekonigiri
 {
+    /// TODO: Make a real summary for this class.
+    /// <summary>
+    /// 
+    /// </summary>
     internal class LevelMap
     {
+        #region Non-Static Members
+
+        // TODO: Migrate level data to this class.
+
+        #endregion
+
+        #region Static Members
         private static Dictionary<string, Type> entityTypeIdentifiers;
 
         public static IList<IGameObject> LoadTiles(String tilespec, Tileset tileset)
@@ -155,5 +166,6 @@ namespace Nekonigiri
             entityTypeIdentifiers = new Dictionary<string, Type>();
             entityTypeIdentifiers.Add("health", typeof(HealthPack));
         }
+        #endregion
     }
 }

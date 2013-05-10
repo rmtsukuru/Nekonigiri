@@ -21,13 +21,26 @@ namespace Nekonigiri
         internal const int WindowWidth = 640;
         internal const int WindowHeight = 480;
 
+        internal const int LevelWidth = 700;
+        internal const int LevelHeight = 480;
+
         internal const bool Admin = true; // Determines whether debug mode can be turned on and off.
         internal const bool Debug = false;
 
         const int HudIconPadding = 10;
 
+        internal static Vector2 ScreenCenter
+        {
+            get
+            {
+                return new Vector2(WindowWidth / 2, WindowHeight / 2);
+            }
+        }
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Vector2 levelSize;
 
         Sprite backgroundSprite;
         SpriteFont hudFont;
