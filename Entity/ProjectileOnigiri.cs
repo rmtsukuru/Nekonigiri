@@ -21,21 +21,32 @@ namespace Nekonigiri
         {
             get { return ProjectileOnigiri.DamageValue; }
         }
-        
-        public bool IsFacingRight
-        {
-            get;
-            protected set;
-        }
 
         public ProjectileOnigiri(Vector2 position, bool isFacingRight)
+            : this(position, FetchVelocityFromDirection(isFacingRight))
+        {
+            
+        }
+
+        public ProjectileOnigiri(Vector2 position, Vector2 velocity)
             : base(FetchSprite(), Faction.Player, 1, true)
         {
             this.Position = position;
-            this.IsFacingRight = isFacingRight;
-            this.Velocity = isFacingRight ? new Vector2(BaseMovementSpeed, 0) : new Vector2(-1 * BaseMovementSpeed, 0);
+            this.Velocity = velocity;
             this.spin = 0;
             this.sprite.Origin = new Vector2(this.sprite.Texture.Width / 2, this.sprite.Texture.Height / 2);
+        }
+
+        private static Vector2 FetchVelocityFromDirection(bool isFacingRight)
+        {
+            if (isFacingRight)
+            {
+                return new Vector2(BaseMovementSpeed, 0);
+            }
+            else
+            {
+                return new Vector2(-1 * BaseMovementSpeed, 0);
+            }
         }
 
         private static Sprite FetchSprite()
