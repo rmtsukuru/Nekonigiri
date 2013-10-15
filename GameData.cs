@@ -28,6 +28,12 @@ namespace Nekonigiri
             set;
         }
 
+        public MouseState lastMouseState
+        {
+            get;
+            set;
+        }
+
         public ILevel CurrentLevel
         {
             get;

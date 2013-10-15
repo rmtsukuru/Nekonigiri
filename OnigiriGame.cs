@@ -50,6 +50,7 @@ namespace Nekonigiri
         private Texture2D lowHpBarOverlay;
         private Texture2D currentHpBarOverlay;
         private Sprite onigiriIconSprite;
+        private Texture2D cursorImage;
 
         private Neko player;
         private ICamera camera;
@@ -76,6 +77,7 @@ namespace Nekonigiri
             GameData.Instance.Content = this.Content;
             GameData.Instance.game = this;
             GameData.Instance.lastKeyboardState = Keyboard.GetState();
+            GameData.Instance.lastMouseState = Mouse.GetState();
             GameData.Instance.CurrentLevel = this;
 
             this.player = new Neko();
@@ -104,6 +106,7 @@ namespace Nekonigiri
             this.mediumHpBarOverlay = Content.Load<Texture2D>("bar31");
             this.lowHpBarOverlay = Content.Load<Texture2D>("bar41");
             this.onigiriIconSprite = new Sprite(Content.Load<Texture2D>("o"));
+            this.cursorImage = Content.Load<Texture2D>("cursor");
 
             IList<IGameObject> tiles = LevelMap.LoadTiles(FileLoader.ReadAllText("testlevel.txt"), Tileset.GetDefaultTileset());
             foreach (IGameObject tile in tiles)
@@ -180,6 +183,7 @@ namespace Nekonigiri
             this.camera.Update(gameTime);
 
             GameData.Instance.lastKeyboardState = Keyboard.GetState();
+            GameData.Instance.lastMouseState = Mouse.GetState();
 
             this.UpdateHUD(gameTime);
 
@@ -223,6 +227,7 @@ namespace Nekonigiri
             {
                 entity.Draw(spriteBatch, gameTime, camera);
             }
+            this.DrawCursor(spriteBatch, gameTime);
             this.DrawHUD(spriteBatch, gameTime);
 
             spriteBatch.End();
@@ -255,6 +260,11 @@ namespace Nekonigiri
             Rectangle percentFill = new Rectangle(rect.X, rect.Y, (int) (rect.Width * fillPercent), rect.Height);
             spriteBatch.Draw(barSprite, percentFill, Color.White);
             spriteBatch.Draw(overlay, overlayPos, Color.White);
+        }
+
+        private void DrawCursor(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            spriteBatch.Draw(this.cursorImage, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), Color.White); 
         }
 
         #region ILevel Members

@@ -174,6 +174,38 @@ namespace Nekonigiri
                 this.playerRunning = false;
             }
 
+            if (Mouse.GetState().LeftButton.Equals(ButtonState.Pressed) && GameData.Instance.lastMouseState.LeftButton.Equals(ButtonState.Released))
+            {
+                if (this.OnigiriCount > 0)
+                {
+                    this.OnigiriCount--;
+                    Vector2 displacement = new Vector2(Mouse.GetState().X - Position.X, Mouse.GetState().Y - Position.Y);
+                    displacement.Normalize();
+                    float speed = ProjectileOnigiri.BaseMovementSpeed;
+                    Vector2 velocity = new Vector2(speed * displacement.X, speed * displacement.Y);
+                    float x, y;
+                    if (velocity.X > 0)
+                    {
+                        x = this.TranslatedHitbox.Right;
+                    }
+                    else
+                    {
+                        x = this.Position.X - ProjectileOnigiri.Width;
+                    }
+                    if (velocity.Y > 0)
+                    {
+                        y = this.TranslatedHitbox.Bottom;
+                    }
+                    else
+                    {
+                        y = this.Position.Y - ProjectileOnigiri.Height;
+                    }
+                    Vector2 pos = new Vector2(x, y);
+                    pos = new Vector2(pos.X + Velocity.X, pos.Y + Velocity.Y);
+                    GameData.Instance.CurrentLevel.AddObject(new ProjectileOnigiri(pos, velocity));
+                }
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.X) && GameData.Instance.lastKeyboardState.IsKeyUp(Keys.X))
             {
                 if (this.OnigiriCount > 0)

@@ -10,8 +10,9 @@ namespace Nekonigiri
     internal class ProjectileOnigiri : Damageable, IDamage
     {
         public static readonly float Width = ProjectileOnigiri.FetchSprite().Texture.Width;
+        public static readonly float Height = ProjectileOnigiri.FetchSprite().Texture.Height;
 
-        private const float BaseMovementSpeed = 5;
+        internal const float BaseMovementSpeed = 5;
         private const float AngularVelocity = 0.01f; // In radians - about 20 degrees.
         private const int DamageValue = 10;
 
