@@ -116,14 +116,14 @@ namespace Nekonigiri
         public override void Update(GameTime gameTime)
         {
             // Input and Motion
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
                 Velocity = new Vector2(movementSpeed, Velocity.Y);
                 this.isFacingRight = true;
                 this.playerMoving = true;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) || Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 float movementSpeed = playerRunning ? PlayerMovementSpeed * PlayerRunSpeedMultiplier : PlayerMovementSpeed;
                 Velocity = new Vector2(-1 * movementSpeed, Velocity.Y);
@@ -149,13 +149,18 @@ namespace Nekonigiri
             }
 
             // TODO: Get trigger input for this working.
-            if (Keyboard.GetState().IsKeyDown(Keys.Z) && 
+            if ((Keyboard.GetState().IsKeyDown(Keys.Z) || Keyboard.GetState().IsKeyDown(Keys.Space)) && 
                 ((!this.playerJumping && !this.playerFalling) || GameData.Instance.Debug))
             {
                 this.playerJumping = true;
                 this.remainingJumpTime = PlayerMaxJumpTime;
             }
-            if (Keyboard.GetState().IsKeyUp(Keys.Z) && this.playerJumping)
+            if (Keyboard.GetState().IsKeyUp(Keys.Z) && GameData.Instance.lastKeyboardState.IsKeyDown(Keys.Z) && this.playerJumping)
+            {
+                this.playerJumping = false;
+                this.playerFalling = true;
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Space) && GameData.Instance.lastKeyboardState.IsKeyDown(Keys.Space) && this.playerJumping)
             {
                 this.playerJumping = false;
                 this.playerFalling = true;
