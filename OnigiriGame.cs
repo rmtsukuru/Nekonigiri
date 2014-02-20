@@ -230,6 +230,10 @@ namespace Nekonigiri
             }
             this.DrawCursor(spriteBatch, gameTime);
             this.DrawHUD(spriteBatch, gameTime);
+            if (GameData.Instance.Debug)
+            {
+                this.DrawDebugHUD(spriteBatch, gameTime);
+            }
 
             spriteBatch.End();
 
@@ -253,6 +257,12 @@ namespace Nekonigiri
             spriteBatch.Draw(onigiriIconSprite.Texture, iconPos, Color.White);
             string s = player.OnigiriCount + "/" + player.MaxOnigiri;
             spriteBatch.DrawString(hudFont, s, new Vector2(iconPos.X + onigiriIconSprite.Texture.Width + HudIconPadding, 0), Color.White);
+        }
+
+        private void DrawDebugHUD(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            string s = "Camera X: " + camera.Position.X + " Y: " + camera.Position.Y;
+            spriteBatch.DrawString(hudFont, s, new Vector2(0, 460), Color.White);
         }
 
         private void DrawBar(SpriteBatch spriteBatch, Texture2D barSprite, Texture2D overlay, Texture2D underlay, Rectangle rect, double fillPercent, Vector2 overlayPos)
