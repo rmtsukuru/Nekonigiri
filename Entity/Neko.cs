@@ -42,6 +42,8 @@ namespace Nekonigiri
         bool playerFalling;
         double remainingJumpTime;
 
+        public ICamera camera;
+
         public int OnigiriCount
         {
             get;
@@ -184,7 +186,8 @@ namespace Nekonigiri
                 if (this.OnigiriCount > 0)
                 {
                     this.OnigiriCount--;
-                    Vector2 displacement = new Vector2(Mouse.GetState().X - Position.X, Mouse.GetState().Y - Position.Y);
+                    Vector2 cursorPos = this.camera.absolutePosition(Mouse.GetState().X, Mouse.GetState().Y);
+                    Vector2 displacement = new Vector2(cursorPos.X - Position.X, cursorPos.Y - Position.Y);
                     displacement.Normalize();
                     float speed = ProjectileOnigiri.BaseMovementSpeed;
                     Vector2 velocity = new Vector2(speed * displacement.X, speed * displacement.Y);

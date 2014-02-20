@@ -22,5 +22,22 @@ namespace Nekonigiri
         }
 
         void Update(GameTime gameTime);
+
+        /// <summary>
+        /// Converts from coordinates relative to this camera to absolute
+        /// coordinates.
+        /// </summary>
+        /// <param name="relativePosition">Camera-relative coordinates.</param>
+        /// <returns>Absolute coordinates.</returns>
+        Vector2 absolutePosition(Vector2 relativePosition);
+
+        /// <summary>
+        /// Converts from coordinates relative to this camera to absolute
+        /// coordinates.
+        /// </summary>
+        /// <param name="x">Relative x-coordinate.</param>
+        /// <param name="y">Relative y-coordinate.</param>
+        /// <returns>Absolute coordinates.</returns>
+        Vector2 absolutePosition(float x, float y);
     }
 }

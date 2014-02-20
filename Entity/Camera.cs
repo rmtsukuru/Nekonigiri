@@ -25,5 +25,15 @@ namespace Nekonigiri
             this.Position = new Vector2(this.Position.X + this.Velocity.X,
                                         this.Position.Y + this.Velocity.Y);
         }
+
+        public virtual Vector2 absolutePosition(Vector2 relativePosition)
+        {
+            return this.Position + relativePosition;
+        }
+
+        public virtual Vector2 absolutePosition(float x, float y)
+        {
+            return this.absolutePosition(new Vector2(x, y)); 
+        }
     }
 }

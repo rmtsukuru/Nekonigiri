@@ -82,6 +82,7 @@ namespace Nekonigiri
 
             this.player = new Neko();
             this.camera = new TargetedCamera(this.player);
+            this.player.camera = this.camera;
 
             this.gameObjects = new List<IGameObject>();
 
