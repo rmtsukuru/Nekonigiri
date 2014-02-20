@@ -262,7 +262,7 @@ namespace Nekonigiri
         private void DrawDebugHUD(SpriteBatch spriteBatch, GameTime gameTime)
         {
             string s = "Camera X: " + camera.Position.X + " Y: " + camera.Position.Y;
-            spriteBatch.DrawString(hudFont, s, new Vector2(0, 460), Color.White);
+            spriteBatch.DrawString(hudFont, s, new Vector2(0, 460), Color.Crimson);
         }
 
         private void DrawBar(SpriteBatch spriteBatch, Texture2D barSprite, Texture2D overlay, Texture2D underlay, Rectangle rect, double fillPercent, Vector2 overlayPos)
