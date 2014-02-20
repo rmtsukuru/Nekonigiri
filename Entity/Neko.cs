@@ -132,7 +132,8 @@ namespace Nekonigiri
                 this.isFacingRight = false;
                 this.playerMoving = true;
             }
-            if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right))
+            if ((Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right)) &&
+                (Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.D)))
             {
                 this.playerMoving = false;
                 if (this.Velocity.X > 0)
