@@ -21,7 +21,7 @@ namespace Nekonigiri
         internal const int WindowWidth = 640;
         internal const int WindowHeight = 480;
 
-        private const int LevelWidth = 976;
+        private const int LevelWidth = 1920;
         private const int LevelHeight = 480;
 
         internal const bool Admin = true; // Determines whether debug mode can be turned on and off.
