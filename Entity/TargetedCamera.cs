@@ -98,7 +98,7 @@ namespace Nekonigiri
             {
                 float y = GameData.Instance.CurrentLevel.Height - OnigiriGame.WindowHeight;
                 this.Position = new Vector2(this.Position.X, y);
-                this.Velocity = new Vector2(this.Position.X, y);
+                this.Velocity = new Vector2(this.Velocity.X, 0);
             }
         }
     }
