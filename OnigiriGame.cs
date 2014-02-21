@@ -116,8 +116,9 @@ namespace Nekonigiri
             }
 
             // TODO: Load this dynamically from map spec file.
-            this.Width = OnigiriGame.LevelWidth;
-            this.Height = OnigiriGame.LevelHeight;
+            Vector2 levelSize = FileLoader.GetLevelSize("testlevel.txt");
+            this.Width = (int) levelSize.X;
+            this.Height = (int) levelSize.Y;
 
             this.gameObjects.Add(this.player);
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
+using Microsoft.Xna.Framework;
 
 namespace Nekonigiri
 {
@@ -27,6 +28,24 @@ namespace Nekonigiri
                 }
             }
             return File.ReadAllText(path);
+        }
+
+        private static Vector2 GetLevelSizeDirect(string path)
+        {
+            string[] lines = File.ReadAllLines(path);
+            return new Vector2(48 * lines[0].Length,  48 * lines.Length);
+        }
+
+        public static Vector2 GetLevelSize(string path)
+        {
+            for (int i = 0; i < Directories.Length; i++)
+            {
+                if (File.Exists(Directories[i] + path))
+                {
+                    return GetLevelSizeDirect(Directories[i] + path);
+                }
+            }
+            return GetLevelSizeDirect(path);
         }
 
         public static XmlDocument LoadXml(string path)
