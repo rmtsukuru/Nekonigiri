@@ -36,6 +36,9 @@ namespace Nekonigiri
             this.Velocity = velocity;
             this.spin = 0;
             this.sprite.Origin = new Vector2(this.sprite.Texture.Width / 2, this.sprite.Texture.Height / 2);
+            Vector2 offset = Vector2.Multiply(this.sprite.Origin, -1);
+            this.Hitbox = new Rectangle((int)offset.X, (int)offset.Y, this.sprite.Texture.Width, 
+                                                            this.sprite.Texture.Height);
         }
 
         private static Vector2 FetchVelocityFromDirection(bool isFacingRight)

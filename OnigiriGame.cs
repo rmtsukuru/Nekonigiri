@@ -275,7 +275,8 @@ namespace Nekonigiri
 
         private void DrawCursor(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.Draw(this.cursorImage, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), Color.White); 
+            Vector2 origin = new Vector2(this.cursorImage.Width / 2, this.cursorImage.Height / 2);
+            spriteBatch.Draw(this.cursorImage, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), null, Color.White, 0, origin, 1, SpriteEffects.None, 1); 
         }
 
         #region ILevel Members
