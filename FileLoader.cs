@@ -33,7 +33,15 @@ namespace Nekonigiri
         private static Vector2 GetLevelSizeDirect(string path)
         {
             string[] lines = File.ReadAllLines(path);
-            return new Vector2(48 * lines[0].Length,  48 * lines.Length);
+            int maxLength = 0;
+            foreach (string s in lines)
+            {
+                if (s.Length > maxLength)
+                {
+                    maxLength = s.Length;
+                }
+            }
+            return new Vector2(48 * maxLength,  48 * lines.Length);
         }
 
         public static Vector2 GetLevelSize(string path)
