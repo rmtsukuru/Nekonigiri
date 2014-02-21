@@ -23,6 +23,7 @@ namespace Nekonigiri
 
         private const int LevelWidth = 1920;
         private const int LevelHeight = 960;
+        private readonly string LevelName = "testlevel";
 
         internal const bool Admin = true; // Determines whether debug mode can be turned on and off.
         internal const bool Debug = false;
@@ -109,20 +110,20 @@ namespace Nekonigiri
             this.onigiriIconSprite = new Sprite(Content.Load<Texture2D>("o"));
             this.cursorImage = Content.Load<Texture2D>("cursor");
 
-            IList<IGameObject> tiles = LevelMap.LoadTiles(FileLoader.ReadAllText("testlevel.txt"), Tileset.GetDefaultTileset());
+            IList<IGameObject> tiles = LevelMap.LoadTiles(FileLoader.ReadAllText(LevelName + ".txt"), Tileset.GetDefaultTileset());
             foreach (IGameObject tile in tiles)
             {
                 this.gameObjects.Add(tile);
             }
 
             // TODO: Load this dynamically from map spec file.
-            Vector2 levelSize = FileLoader.GetLevelSize("testlevel.txt");
+            Vector2 levelSize = FileLoader.GetLevelSize(LevelName + ".txt");
             this.Width = (int) levelSize.X;
             this.Height = (int) levelSize.Y;
 
             this.gameObjects.Add(this.player);
 
-            IList<IGameObject> entities = LevelMap.LoadEntities(FileLoader.LoadXml("testlevel.xml"));
+            IList<IGameObject> entities = LevelMap.LoadEntities(FileLoader.LoadXml(LevelName + ".xml"));
             foreach (IGameObject entity in entities)
             {
                 this.gameObjects.Add(entity);
