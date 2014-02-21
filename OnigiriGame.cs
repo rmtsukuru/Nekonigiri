@@ -128,10 +128,10 @@ namespace Nekonigiri
             }
 
             // Level boundaries
-            this.gameObjects.Add(new BlackHole(new Rectangle(0, LevelHeight+70, LevelWidth, 1)));
-            this.gameObjects.Add(new InvisibleWall(new Rectangle(-1, -300, 1, LevelHeight + 300 + 70)));
-            this.gameObjects.Add(new InvisibleWall(new Rectangle(LevelWidth, -300, 1, LevelHeight + 300 + 70)));
-            this.gameObjects.Add(new BlackHole(new Rectangle(0, -301, LevelWidth, 1)));
+            this.gameObjects.Add(new BlackHole(new Rectangle(0, Height+70, Width, 1)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(-1, -300, 1, Height + 300 + 70)));
+            this.gameObjects.Add(new InvisibleWall(new Rectangle(Width, -300, 1, Height + 300 + 70)));
+            this.gameObjects.Add(new BlackHole(new Rectangle(0, -301, Width, 1)));
         }
 
         /// <summary>
