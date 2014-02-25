@@ -68,6 +68,11 @@ namespace Nekonigiri
 
         public override void Touches(IGameObject entity)
         {
+            if (entity is IDamageable && (entity as IDamageable).Faction == this.Faction)
+            {
+                return;
+            }
+
             this.Damage(1);
             // TODO: Refactor the lower portion of this to make it accessible to all instances of IDamage.
             if (entity is IDamageable)
@@ -77,11 +82,6 @@ namespace Nekonigiri
                 {
                     target.Damage(this.DamageOnHit);
                 }
-            }
-
-            if (entity is Neko)
-            {
-                (entity as Neko).OnigiriCount++;
             }
         }
     }
