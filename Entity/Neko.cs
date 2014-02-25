@@ -25,10 +25,10 @@ namespace Nekonigiri
         const float PlayerMovementSpeed = 4;
         const float PlayerInertiaAcceleration = 0.3f;
         const float PlayerRunSpeedMultiplier = 2;
-        const float PlayerFallSpeed = 8;
+        const float PlayerFallSpeed = 9;
         const float PlayerFallAcceleration = 0.7f;
-        const float PlayerMaxJumpTime = .26f;
-        const float PlayerJumpSpeed = 8;
+        const float PlayerMaxJumpTime = .18f;
+        const float PlayerJumpSpeed = 9;
 
         private static Sprite standingSprite;
         private static Sprite walkingSprite;
